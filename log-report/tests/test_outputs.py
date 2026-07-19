@@ -22,12 +22,12 @@ def report() -> dict:
 
 
 def test_report_is_valid_json_object(report: dict):
-    """The report exists and is a JSON object."""
+    """Criterion 1: /app/report.json exists and contains a single valid JSON object."""
     assert report is not None
 
 
 def test_total_requests(report: dict):
-    """total_requests matches the number of request lines in the log."""
+    """Criterion 2: total_requests (integer) is the total number of request lines."""
     assert report.get("total_requests") == EXPECTED_TOTAL_REQUESTS, (
         f"total_requests should be {EXPECTED_TOTAL_REQUESTS}, "
         f"got {report.get('total_requests')!r}"
@@ -35,7 +35,7 @@ def test_total_requests(report: dict):
 
 
 def test_unique_ips(report: dict):
-    """unique_ips matches the number of distinct client IPs in the log."""
+    """Criterion 3: unique_ips (integer) is the number of distinct client IPs."""
     assert report.get("unique_ips") == EXPECTED_UNIQUE_IPS, (
         f"unique_ips should be {EXPECTED_UNIQUE_IPS}, "
         f"got {report.get('unique_ips')!r}"
@@ -43,7 +43,7 @@ def test_unique_ips(report: dict):
 
 
 def test_top_path(report: dict):
-    """top_path is the most-requested path in the log."""
+    """Criterion 4: top_path (string) is the most-requested path in the log."""
     assert report.get("top_path") == EXPECTED_TOP_PATH, (
         f"top_path should be {EXPECTED_TOP_PATH!r}, got {report.get('top_path')!r}"
     )
